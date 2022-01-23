@@ -24,8 +24,9 @@
     <div id="app">
       <!--background linear gradient-->
       <div class="container d-flex p-5">
-        <!-- sidebar -->
+        <!-- sidebar ---------------------------------------------------------->
         <div class="sidebar">
+          <!-- profilo personale -->
           <header>
             <div class="profilo-personale d-flex justify-content-between p-1">
               <div>
@@ -41,6 +42,7 @@
             </div>
           </header>
 
+          <!-- notifiche -->
           <div class="box-notifiche d-flex p-3">
             <div id="bell-box" class="rounded-circle px-1">
               <a href="#"><i class="fas fa-bell-slash align-middle"></i></a>
@@ -52,6 +54,7 @@
             </div>
           </div>
 
+          <!-- research -->
           <div class="box-ricerca-chat p-1">
             <div class="box-interno-ricerca d-flex py-1">
               <a href="#"><i class="fas fa-search px-1"></i></a>
@@ -59,6 +62,7 @@
                 class="flex-grow-1"
                 type="text"
                 placeholder="Cerca o inizia una nuova chat"
+                v-model="temporaryResearch"
               />
             </div>
           </div>
@@ -68,8 +72,16 @@
             class="contatti d-flex px-1 py-1"
             v-for="(contact, index) in contacts"
             @click="setCurrentContact(index)"
+            v-if="contact.name.toLowerCase().includes(temporaryResearch)"
           >
+            <!-- v-for-> ciclo ogni singolo oggetto/contatto all'interno dell'array contacts -->
+            <!-- @click-> all'evento click lancio metodo che richiama il contatto con index corrente(cliccato) -->
+            <!-- v-if-> pone la condizione che i caratteri digitati nell'input (r.61html) e immagazzinati
+              in temporaryResearch siano inclusi/contenuti nei nomi dei contatti
+              se la condizione è verificata, stampa solo i contatti filtrati -->
+
             <div class="avatar">
+              <!-- metoodo/scorciatoia per richiamare immagine contatto -->
               <img :src="getAvatarPic(contact)" />
             </div>
             <div class="nome px-2">{{contact.name}}</div>
@@ -78,8 +90,9 @@
         </div>
         <!-- /sidebar -->
 
-        <!-- main -->
+        <!-- main ----------------------------------------------------------->
         <div class="main d-flex flex-column">
+          <!-- profilo contatto corrente -->
           <header class="d-flex justify-content-between py-2">
             <div class="current-contact d-flex px-2">
               <img

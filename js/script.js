@@ -89,6 +89,7 @@ new Vue({
     ],
     currentIndex: 0,
     temporaryMessage: "",
+    temporaryResearch: "",
   },
   methods: {
     getAvatarPic(contact) {
@@ -97,7 +98,7 @@ new Vue({
     setCurrentContact(index) {
       this.currentIndex = index;
     },
-    // nell'array messages pusho
+    // nell'array messages (all'interno del corrente array contacts) pusho
     // un nuovo messaggio immagazzinato in temporaryMessage
     // attraverso input, cambiando status in sent
     // infine, azzero temporaryMessage
@@ -109,6 +110,9 @@ new Vue({
       this.temporaryMessage = " ";
       this.autoReply();
     },
+    // metodo di autorisposta dopo 1 sec
+    // attraverso il push di text (status questa volta in received)
+    // nell'array messages (contenuto a sua volta nel corrente array contacts)
     autoReply() {
       setTimeout(() => {
         this.contacts[this.currentIndex].messages.push({
