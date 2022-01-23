@@ -88,6 +88,7 @@ new Vue({
       },
     ],
     currentIndex: 0,
+    temporaryMessage: "",
   },
   methods: {
     getAvatarPic(contact) {
@@ -95,6 +96,26 @@ new Vue({
     },
     setCurrentContact(index) {
       this.currentIndex = index;
+    },
+    // nell'array messages pusho
+    // un nuovo messaggio immagazzinato in temporaryMessage
+    // attraverso input, cambiando status in sent
+    // infine, azzero temporaryMessage
+    sendMessage() {
+      this.contacts[this.currentIndex].messages.push({
+        text: this.temporaryMessage,
+        status: "sent",
+      });
+      this.temporaryMessage = " ";
+      this.autoReply();
+    },
+    autoReply() {
+      setTimeout(() => {
+        this.contacts[this.currentIndex].messages.push({
+          text: "blabla bla",
+          status: "received",
+        });
+      }, 1000);
     },
   },
 });

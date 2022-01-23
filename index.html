@@ -109,10 +109,14 @@
           <footer class="d-flex justify-content-between py-2">
             <a href="#"><i class="far fa-smile px-2"></i></a>
 
+            <!-- con v-model immagazzino input temporaryMessage e all'evento
+            .enter lancio metodo sendMessage -->
             <input
               class="flex-grow-1 rounded"
               type="text"
               placeholder="Scrivi un messaggio"
+              v-model="temporaryMessage"
+              @keyup.enter="sendMessage"
             />
 
             <a href="#"><i class="fas fa-microphone px-2"></i></a>
